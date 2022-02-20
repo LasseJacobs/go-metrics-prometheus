@@ -1,4 +1,4 @@
-module gometrics-prometheus
+module github.com/LasseJacobs/go-metrics-prometheus
 
 go 1.17
 

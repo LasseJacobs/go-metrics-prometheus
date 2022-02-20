@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/rcrowley/go-metrics"
-	"gometrics-prometheus/prometheus"
+	"github.com/LasseJacobs/go-metrics-prometheus/prometheus"
 	"log"
 	"net/http"
 )
