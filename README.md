@@ -30,3 +30,15 @@ See `example/simple-server` for a full working example. Alternatively you can ru
 test web-app that exposes some metrics, and a prometheus server that will monitor these metrics.
 
 By supplying `nil` to the `MakePrometheusHandler` the default metrics registry will be used. 
+
+You can verify that it is working by going to: `localhost:8080/metrics`.
+Note that if you do not expose any metrics, as is the case in this example, this page will be empty.
+
+### Install
+```bash
+go get -u github.com/LasseJacobs/go-metrics-prometheus
+```
+running go tidy might be required:
+```bash
+go mode tidy
+```
