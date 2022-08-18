@@ -10,12 +10,25 @@ var (
 	percentiles = []float64{0.50, 0.75, 0.95, 0.99}
 )
 
-func MakePrometheusHandler(r metrics.Registry) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
-		var registry = r
-		if registry == nil {
-			registry = metrics.DefaultRegistry
+func MakePrometheusHandler(r metrics.Registry, collectors []Collector) http.Handler {
+	var registry = r
+	if registry == nil {
+		registry = metrics.DefaultRegistry
+	}
+
+	if collectors != nil {
+		for _, c := range collectors {
+			c.Register(registry)
 		}
+	}
+
+	return http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+		if collectors != nil {
+			for _, c := range collectors {
+				c.Collect()
+			}
+		}
+
 		err := snapshot(registry, w)
 		if err != nil {
 			http.Error(w, "Internal Server Issue", 500)

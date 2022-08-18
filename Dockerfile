@@ -10,7 +10,7 @@ RUN go mod download
 
 # Building stuff
 COPY ./prometheus ./prometheus
-COPY _test/main.tgo ./main.go
+COPY example/simple-server/main.go ./main.go
 RUN go build -o prom-test .
 
 FROM scratch
